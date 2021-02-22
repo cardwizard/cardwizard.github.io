@@ -2,23 +2,26 @@
 layout: about
 title: about
 permalink: /
-description: <a href="#">Affiliations</a>. Address. Contacts. Moto. Etc.
+description: I build software! I specialize in distributed systems and security.
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: prof_pic.jpeg
   address: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
 
 news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com){:target="\_blank"}. You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+Hello! I'm Aadesh, a software engineer based out of Maryland. I enjoy creating software tools to make life easier. 
+I am a Computer Science graduate student at the [University of Maryland](https://www.cs.umd.edu/) where I work as a Graduate Research Assistant with 
+[Prof. Jim Purtilo](https://seam.cs.umd.edu/purtilo/) in the [SEAM lab](https://seam.cs.umd.edu/team).  
 
-Put your address / P.O. box / other info right below your picture. You can also disable any these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+I interned at [Netflix](www.netflix.com) in Summer '20 where I worked with the Customer Trust team. Prior to this, I was a 
+Senior Software Engineer at [Soroco](www.soroco.com) where I helped the team build their process discovery platform. 
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/){:target="\_blank"} and [Academicons](https://jpswalsh.github.io/academicons/){:target="\_blank"}, like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+I received my Bachelors in Technology (B.Tech) in Computer Science from National Institute of Technology, Surat in 2016.
+During my Bachelors', I worked on Computer Vision with [Prof. M.A. Zaveri](https://svnit.ac.in/maz/).
+
+I moonlight as a close-up magician and a musician during my free time. I love hosting people on my podcast where we talk philosophy.        
