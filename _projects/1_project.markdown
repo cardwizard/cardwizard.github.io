@@ -1,77 +1,53 @@
 ---
 layout: page
-title: project 1
-description: a project with a background image
-img: /assets/img/12.jpg
+title: The Python ecosystem is messed up and here's why
+description: A study of security vulnerabilities in the Python Ecosystem.
+img: /assets/img/mask.jpg
 importance: 1
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+The popularity of Python has risen rapidly over the past 15 years.
+It is a major language in some of the most exciting technologies
+today. This popularity has led to a large ecosystem of third party
+packages available via the pip package registry which hosts more
+than 200,000 packages. These third party packages can be reused
+by simply importing the package after installing using package managers like pip. 
+The ease of reuse of third party software comes with
+security risks putting millions of users in danger. In this project, we
+study the ecosystem to analyze this threat.  
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+The mature ecosystem of Python has multiple weak spots that
+we highlight in our project. First, we demonstrate how trivial it is
+to exploit the Python ecosystem. Then, we systematically analyze
+dependencies amongst packages, maintainers and publicly reported
+security issues. Most attacks are possible only if users install malicious packages. We thus try to analyze and evaluate different methods used by attackers to force incorrect downloads. We quantify
+our ideas by estimating the potential threat that can be caused by
+exploiting a popular Python package. We also discuss methods used
+in the industry to defend against such attacks
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/1.jpg' | relative_url }}" alt="" title="example image"/>
+        <a href="http://www.arxiv-vanity.com/papers/2102.06301/"> <img class="img-fluid rounded z-depth-1" 
+        src="{{ '/assets/img/QLeEVLC_.jpg' | relative_url }}" alt="" 
+        title="Arxiv Link"/> </a>
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/3.jpg' | relative_url }}" alt="" title="example image"/>
+        <a href="https://www.youtube.com/watch?v=RSKu0qgRKH4&feature=youtu.be"> <img class="img-fluid rounded z-depth-1" 
+        src="{{ '/assets/img/youtube.jpg' | relative_url }}" alt="" title="Link to the Youtube Talk"/>
+        </a>
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/5.jpg' | relative_url }}" alt="" title="example image"/>
+        <a href="https://seam.cs.umd.edu/Posters/aadesh.pdf"> 
+        <img class="img-fluid rounded z-depth-1" height="19%" src="{{ '/assets/img/RSA.jpeg' | relative_url }}" alt="" 
+        title="Link to the poster presented at the RSA conference"/></a>
     </div>
 </div>
 <div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/5.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
-
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, *bled* for your project, and then... you reveal it's glory in the next row of images.
-
-
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/6.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/11.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
+    Links to the paper on arxiv, talk on youtube and poster presentation at the RSA conference can be found above!
 </div>
 
 
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/" target="_blank">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
-
-```html
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/6.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/11.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-```
+## Other Mentions:
+1. William Bengtson's [blog](https://medium.com/@williambengtson/python-typosquatting-for-fun-not-profit-99869579c35d)  
+2. RSA Conference Poster Pitch-off [Talk](https://www.youtube.com/watch?v=6OrMSMsC3kk).  
