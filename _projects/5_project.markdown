@@ -1,8 +1,9 @@
 ---
 layout: page
-title: project 5
-description: a project with a background image
-img: /assets/img/1.jpg
+title: QuickUI
+description: a tool to instantly create a usable UI from any python file which has a CLI created using the Argument Parser.
+img: /assets/img/QuickUI.png
+redirect: https://github.com/cardwizard/QuickUI
 importance: 3
 ---
 
