@@ -2,7 +2,7 @@
 layout: page
 title: Corona Partybox - Turning your mobile phone into a gaming controller
 description: Quarantine Games - Course Project for CMSC 838J
-img: /assets/img/Gesture.png
+img: /assets/img/Gesture.PNG
 importance: 3
 ---
 
