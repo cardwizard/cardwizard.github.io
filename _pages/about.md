@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-description: I build software! I specialize in distributed systems and security.
+description: I specialize in Distributed Systems and Security.
 
 profile:
   align: right
