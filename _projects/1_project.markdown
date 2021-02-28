@@ -50,4 +50,6 @@ in the industry to defend against such attacks
 
 ## Other Mentions:
 1. William Bengtson's [blog](https://medium.com/@williambengtson/python-typosquatting-for-fun-not-profit-99869579c35d)  
-2. RSA Conference Poster Pitch-off [Talk](https://www.youtube.com/watch?v=6OrMSMsC3kk).  
+2. RSA Conference Poster Pitch-off [Talk](https://www.youtube.com/watch?v=6OrMSMsC3kk). 
+3. On Twitter:  
+{% twitter https://twitter.com/NirantK/status/1365561089925255174?s=20 %}
