@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Aadesh M. Bagmar | blank</title>
+<title>Aadesh M. Bagmar | 2. Thinking outside the box - Column-oriented Databases</title>
 <meta name="description" content="The Academic Life of Aadesh M Bagmar
 ">
 
@@ -29,7 +29,7 @@
 <link rel="shortcut icon" href="/assets/img/favicon.ico">
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/blog/2020/columnardb/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -162,58 +162,30 @@
     <!-- Content -->
 
     <div class="container mt-5">
-      <div class="post">
+      
 
-  <div class="header-bar">
-    <h1>cardwizard.github.io/</h1>
-    <h2>a simple whitespace theme for academics</h2>
-  </div>
+<div class="post">
 
+  <header class="post-header">
+    <h1 class="post-title">2. Thinking outside the box - Column-oriented Databases</h1>
+    <p class="post-meta">February 10, 2020</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/did/">9. Thinking outside the box - Chromium's defense in "depth"</a></h3>
-        <p class="post-meta">March 28, 2020</p>
-        <p>What is brilliant about Chrome?</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/compression/">8. Thinking outside the box - Why was compression removed from TLS?</a></h3>
-        <p class="post-meta">March 21, 2020</p>
-        <p>The DEFLATE attack</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/opt/">7. Thinking outside the box - The OPT-ACK attack</a></h3>
-        <p class="post-meta">March 15, 2020</p>
-        <p>Why OPT-ACK was deprecated?</p>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+    <p>Databases are always thought of as row-stores. Features or parameters are the columns and data items are stored as rows. They are stored on disk as rows, with the fundamental idea being that it is faster to write to a contiguous memory location.</p>
+
+<p>However, the same idea crumbles when you want to create a store that needs to support a heavy read workload. Reading a single column still requires the seek function to go through all the columns since the next item in the column will be placed after “n” blocks where “n” is the number of columns.</p>
+
+<p>Here is an absurd idea - Store data in form of columns There are systems that have implemented this and have achieved throughput (for read queries) which is more than 1000 times that of traditional systems!</p>
+
+<p>But what major benefits do we get by storing data items in the form of columns?
+Since the data type of all elements of a column will be the same, you can achieve higher levels of compression (reducing disk access). Moreover, data for a column is placed adjacent to each other, thus, speeding up the read operation.</p>
+
+<p>This idea was proposed in https://lnkd.in/f_UQTbf and has been commercialized by many OLAP systems like VerticaDB, etc.</p>
+
+  </article>
 
   
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/blog/index.html" title="blank">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/2/index.html" title="blank - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/3/index.html" title="blank - page 3">3</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
-
-
 
 </div>
 

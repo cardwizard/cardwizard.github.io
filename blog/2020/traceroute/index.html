@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Aadesh M. Bagmar | blank</title>
+<title>Aadesh M. Bagmar | 5. Thinking outside the box - Tracing your network packet</title>
 <meta name="description" content="The Academic Life of Aadesh M Bagmar
 ">
 
@@ -29,7 +29,7 @@
 <link rel="shortcut icon" href="/assets/img/favicon.ico">
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/blog/2020/traceroute/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -162,58 +162,27 @@
     <!-- Content -->
 
     <div class="container mt-5">
-      <div class="post">
+      
 
-  <div class="header-bar">
-    <h1>cardwizard.github.io/</h1>
-    <h2>a simple whitespace theme for academics</h2>
-  </div>
+<div class="post">
 
+  <header class="post-header">
+    <h1 class="post-title">5. Thinking outside the box - Tracing your network packet</h1>
+    <p class="post-meta">March 1, 2020</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/did/">9. Thinking outside the box - Chromium's defense in "depth"</a></h3>
-        <p class="post-meta">March 28, 2020</p>
-        <p>What is brilliant about Chrome?</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/compression/">8. Thinking outside the box - Why was compression removed from TLS?</a></h3>
-        <p class="post-meta">March 21, 2020</p>
-        <p>The DEFLATE attack</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/opt/">7. Thinking outside the box - The OPT-ACK attack</a></h3>
-        <p class="post-meta">March 15, 2020</p>
-        <p>Why OPT-ACK was deprecated?</p>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+    <p>Traceroute is an amazing utility that tells you the hops that your network packet has gone through before reaching the destination. These hops could be routers, DNS servers, etc. A sender normally has the information for just the next hop it is connecting to. Then how does traceroute manage to trace the entire route?</p>
+
+<p>Traceroute uses a simple concept called TTL (Time to live). Every network packet has a TTL field embedded inside it. TTL reduces by 1 as the packet hops to the next destination. When the TTL becomes 0, the router where the TTL dropped to 0 sends back an ICMP packet to the sender (which is you in this case) with a message “Destination unreachable”. The “sender” of this ICMP packet is the “hop” where the TTL became zero!</p>
+
+<p>Traceroute uses this simple idea to send packets with TTL=1, TTL=2, TTL=3 and so on. Every time the TTL becomes zero, it receives an ICMP packet containing the IP of the intermediate hop. It then translates IP into a human-readable format and shows it to you as the “trace” of your packet! A simple but elegant solution.</p>
+
+<p><a href="https://lnkd.in/eJKQyEf">Traceroute original paper</a></p>
+
+  </article>
 
   
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/blog/index.html" title="blank">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/2/index.html" title="blank - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/3/index.html" title="blank - page 3">3</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
-
-
 
 </div>
 

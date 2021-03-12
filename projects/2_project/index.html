@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Aadesh M. Bagmar | blank</title>
+<title>Aadesh M. Bagmar | Buffer Pool management with Reinforcement Learning</title>
 <meta name="description" content="The Academic Life of Aadesh M Bagmar
 ">
 
@@ -29,7 +29,7 @@
 <link rel="shortcut icon" href="/assets/img/favicon.ico">
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/projects/2_project/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -94,7 +94,7 @@
           </li>
           
           <!-- Blog -->
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a class="nav-link" href="/blog/">
               blog
               
@@ -164,56 +164,36 @@
     <div class="container mt-5">
       <div class="post">
 
-  <div class="header-bar">
-    <h1>cardwizard.github.io/</h1>
-    <h2>a simple whitespace theme for academics</h2>
-  </div>
+  <header class="post-header">
+    <h1 class="post-title">Buffer Pool management with Reinforcement Learning</h1>
+    <p class="post-description">Learning page eviction strategies</p>
+  </header>
 
+  <article>
+    <p>Buffer pool management is a popular area of research in Databases. 
+For databases larger than memory, optimal buffer pool management can 
+help in speeding up the processing of user queries. An optimal cache 
+manager will avoid unnecessary operations, maximise the cache hit rate 
+which results in fewer round trips to a slower backend storage system and 
+minimize the size of storage needed to achieve a high hit rate. Buffer 
+management is thus, critical for the efficiency of the page accesses to 
+decide which pages are frequently used or will be used in near future for 
+faster processing of upcoming queries. Various heuristic-based policies 
+aiming at selecting the right page to evict have been proposed, however, 
+existing database systems typically implement generalized heuristics for 
+all workloads, without taking the workload structure into consideration. 
+In this work, we explore the potential of reinforcement learning to learn 
+a policy for buffer management. In particular, we propose a Q-Learning 
+based framework focusing on page replacement task for a predictive workloads. 
+During execution of a workload and when the buffer is full, our system 
+proposes a page in the buffer for eviction. Our system learns from past 
+execution and creates a generalized, easy to implement solution that 
+databases can adopt. Our simulation results demonstrate that our approach 
+outperforms existing algorithms in certain cases suggesting the benefit 
+of bringing modern learning based techniques into traditional database 
+system design.</p>
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/did/">9. Thinking outside the box - Chromium's defense in "depth"</a></h3>
-        <p class="post-meta">March 28, 2020</p>
-        <p>What is brilliant about Chrome?</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/compression/">8. Thinking outside the box - Why was compression removed from TLS?</a></h3>
-        <p class="post-meta">March 21, 2020</p>
-        <p>The DEFLATE attack</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/opt/">7. Thinking outside the box - The OPT-ACK attack</a></h3>
-        <p class="post-meta">March 15, 2020</p>
-        <p>Why OPT-ACK was deprecated?</p>
-      </li>
-    
-  </ul>
-
-  
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/blog/index.html" title="blank">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/2/index.html" title="blank - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/3/index.html" title="blank - page 3">3</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
-
-
+  </article>
 
 </div>
 

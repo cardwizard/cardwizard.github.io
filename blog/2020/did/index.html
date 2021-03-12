@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Aadesh M. Bagmar | blank</title>
+<title>Aadesh M. Bagmar | 9. Thinking outside the box - Chromium's defense in "depth"</title>
 <meta name="description" content="The Academic Life of Aadesh M Bagmar
 ">
 
@@ -29,7 +29,7 @@
 <link rel="shortcut icon" href="/assets/img/favicon.ico">
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/blog/2020/did/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -162,58 +162,31 @@
     <!-- Content -->
 
     <div class="container mt-5">
-      <div class="post">
+      
 
-  <div class="header-bar">
-    <h1>cardwizard.github.io/</h1>
-    <h2>a simple whitespace theme for academics</h2>
-  </div>
+<div class="post">
 
+  <header class="post-header">
+    <h1 class="post-title">9. Thinking outside the box - Chromium's defense in "depth"</h1>
+    <p class="post-meta">March 28, 2020</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/did/">9. Thinking outside the box - Chromium's defense in "depth"</a></h3>
-        <p class="post-meta">March 28, 2020</p>
-        <p>What is brilliant about Chrome?</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/compression/">8. Thinking outside the box - Why was compression removed from TLS?</a></h3>
-        <p class="post-meta">March 21, 2020</p>
-        <p>The DEFLATE attack</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/opt/">7. Thinking outside the box - The OPT-ACK attack</a></h3>
-        <p class="post-meta">March 15, 2020</p>
-        <p>Why OPT-ACK was deprecated?</p>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+    <p>Ever wondered why there is so much stress on using the right browser?</p>
+
+<p>What do browsers really do? They take code (HTML, JavaScript) written by other people and execute it on your laptop to render the webpage. Sounds scary when you put it that way from security point of view since a user written code can execute anything it wants on your system.</p>
+
+<p>Chromium handles this by separating the rendering engine from the system accessors. Code in chrome has minimum permissions which does not let the rendering code direct access to the file system. It can do so only through APIs (e.g. while adding attachments in email). For a breach in Chromium, an attacker needs to inflitrate both the rendering engine and the system handlers (increasing depth). This method stops innumerable attacks and is almost unbreakable.</p>
+
+<p>Next time a shady page asks you to download a browser, think again.</p>
+
+<p>Here’s the paper discussing the architecture -</p>
+
+<p>https://lnkd.in/fNerx-j</p>
+
+  </article>
 
   
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/blog/index.html" title="blank">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/2/index.html" title="blank - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/3/index.html" title="blank - page 3">3</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
-
-
 
 </div>
 

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Aadesh M. Bagmar | blank</title>
+<title>Aadesh M. Bagmar | 6. Thinking outside the box - Write Ahead Logging</title>
 <meta name="description" content="The Academic Life of Aadesh M Bagmar
 ">
 
@@ -29,7 +29,7 @@
 <link rel="shortcut icon" href="/assets/img/favicon.ico">
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/blog/2020/wal/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -162,58 +162,37 @@
     <!-- Content -->
 
     <div class="container mt-5">
-      <div class="post">
+      
 
-  <div class="header-bar">
-    <h1>cardwizard.github.io/</h1>
-    <h2>a simple whitespace theme for academics</h2>
-  </div>
+<div class="post">
 
+  <header class="post-header">
+    <h1 class="post-title">6. Thinking outside the box - Write Ahead Logging</h1>
+    <p class="post-meta">March 8, 2020</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/did/">9. Thinking outside the box - Chromium's defense in "depth"</a></h3>
-        <p class="post-meta">March 28, 2020</p>
-        <p>What is brilliant about Chrome?</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/compression/">8. Thinking outside the box - Why was compression removed from TLS?</a></h3>
-        <p class="post-meta">March 21, 2020</p>
-        <p>The DEFLATE attack</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/opt/">7. Thinking outside the box - The OPT-ACK attack</a></h3>
-        <p class="post-meta">March 15, 2020</p>
-        <p>Why OPT-ACK was deprecated?</p>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+    <p>Write ahead logging is normally used by the operating system and the databases to guarantee durability and atomicity.</p>
+
+<p>Write-ahead logging ensures that updates are reflected in the log before writing to the actual database. As soon as it can be confirmed that the record has been written to the log, the database considers it safe to tell the user that the record has been committed even if the updates haven’t really reached the database.</p>
+
+<p>But here is a strange question. If we can afford to write updates to the log, why is it any different from updating the database itself?</p>
+
+<p>There are two primary reasons for doing this:</p>
+<ol>
+  <li>
+    <p>Adding something to the log is faster than adding an entry to the database. This is because writing to a log involves sequential writes whereas writing to the database requires random writes.</p>
+  </li>
+  <li>
+    <p>In case the system crashes before a transaction is completed, the actual database remains unaffected. The recovery protocol just goes through the log records and decides whether a transaction should be aborted or committed.</p>
+  </li>
+</ol>
+
+<p>All major systems use WAL. Based on the recovery protocol, these logs may also contain redo and undo logs.</p>
+
+  </article>
 
   
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/blog/index.html" title="blank">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/2/index.html" title="blank - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/3/index.html" title="blank - page 3">3</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
-
-
 
 </div>
 

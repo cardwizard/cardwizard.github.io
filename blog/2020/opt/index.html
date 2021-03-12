@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Aadesh M. Bagmar | blank</title>
+<title>Aadesh M. Bagmar | 7. Thinking outside the box - The OPT-ACK attack</title>
 <meta name="description" content="The Academic Life of Aadesh M Bagmar
 ">
 
@@ -29,7 +29,7 @@
 <link rel="shortcut icon" href="/assets/img/favicon.ico">
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/blog/2020/opt/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -162,58 +162,25 @@
     <!-- Content -->
 
     <div class="container mt-5">
-      <div class="post">
+      
 
-  <div class="header-bar">
-    <h1>cardwizard.github.io/</h1>
-    <h2>a simple whitespace theme for academics</h2>
-  </div>
+<div class="post">
 
+  <header class="post-header">
+    <h1 class="post-title">7. Thinking outside the box - The OPT-ACK attack</h1>
+    <p class="post-meta">March 15, 2020</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/did/">9. Thinking outside the box - Chromium's defense in "depth"</a></h3>
-        <p class="post-meta">March 28, 2020</p>
-        <p>What is brilliant about Chrome?</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/compression/">8. Thinking outside the box - Why was compression removed from TLS?</a></h3>
-        <p class="post-meta">March 21, 2020</p>
-        <p>The DEFLATE attack</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/opt/">7. Thinking outside the box - The OPT-ACK attack</a></h3>
-        <p class="post-meta">March 15, 2020</p>
-        <p>Why OPT-ACK was deprecated?</p>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+    <p>A successful TCP connection involves multiple messages between a client and a server. In simplistic terms, the client requests information, the server replies to it and the client sends an acknowledgement indicating that it has received the file.</p>
+
+<p>Let’s say that there is a large file that we wish to fetch from a server. A server normally chunks the file into smaller packets and streams it to the client. Following the entire protocol for every packet is time consuming. Thus, a concept of Optimistic acknowledgement (OPT-ACK) was introduced where a client greedily sends acknowledgements even before the packet arrives. This method improves end to end throughput.</p>
+
+<p>What if we start sending “ACK” in the correct order even without receiving the previous packet? We just need to make sure that the server receives the next ACK right after it has sent out the packet. Note that an ACK packet is just 40 bytes while the packets sent by the server can be several megabytes and can congest the network. Sherwood in his paper showed that the amplification of bandwidth is more than 30 million times. He also argues that a distributed attack of such kind can bring down large portions of the internet!</p>
+
+  </article>
 
   
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/blog/index.html" title="blank">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/2/index.html" title="blank - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/3/index.html" title="blank - page 3">3</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
-
-
 
 </div>
 
