@@ -12,3 +12,59 @@ $max-content-width: {{site.max_width}};
   "layout",
   "base"
 ;
+
+// Typography — Inter for clean, modern feel
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+code, pre {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+// Smooth page title
+.post-header {
+  margin-bottom: 2rem;
+
+  .post-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+}
+
+// Refined description subtitle
+.desc {
+  color: var(--global-text-muted);
+  font-size: 1.05rem;
+  font-weight: 400;
+  margin-top: 0.25rem;
+}
+
+// Dark mode toggle polish
+.toggle-container {
+  a {
+    cursor: pointer;
+    color: var(--global-icon-color);
+    transition: color 0.2s ease;
+    &:hover {
+      color: var(--global-theme-color);
+      border-bottom: none !important;
+    }
+  }
+}
+
+// Selection color
+::selection {
+  background-color: rgba(37, 99, 235, 0.15);
+  color: var(--global-text-color);
+}
+
+// Smooth scroll
+html {
+  scroll-behavior: smooth;
+}

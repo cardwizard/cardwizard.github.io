@@ -8,11 +8,23 @@ p, h1, h2, h3, h4, h5, h6, em, div, span, strong {
   color: var(--global-text-color);
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+p {
+  line-height: 1.75;
+  color: var(--global-text-color);
+}
+
 a, table.table a {
   color: var(--global-theme-color);
+  transition: color 0.2s ease, border-color 0.2s ease;
   &:hover {
-    color: var(--global-theme-color);
-    text-decoration: underline;
+    color: var(--global-hover-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--global-hover-color);
   }
   &:hover:after {
     width: 100%;
@@ -33,20 +45,32 @@ a, table.table a {
   margin-top: 0.75rem;
   margin-bottom: 1.5rem;
   text-align: center;
+  color: var(--global-text-muted);
 }
 
 
 // Profile
 
 .profile {
-  margin-left: 1rem;
+  margin-left: 2rem;
   width: 100%;
+
+  img {
+    border-radius: 12px;
+    box-shadow: var(--global-shadow-lg);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    }
+  }
 
   .address {
     margin-bottom: 5px;
-    margin-top: 5px;
+    margin-top: 10px;
     font-family: monospace;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    color: var(--global-text-muted);
     p {
       display: inline-block;
       margin: 0;
@@ -65,7 +89,9 @@ a, table.table a {
 
 .post-description {
   margin-bottom: 2rem;
-  font-size: 0.875rem;
+  font-size: 0.95rem;
+  color: var(--global-text-muted);
+  font-weight: 400;
   a {
     color: inherit;
     &:hover {
@@ -80,29 +106,40 @@ a, table.table a {
 
 .navbar {
   box-shadow: none;
-  border-bottom: 1px solid $grey-color-light;
-  opacity: 0.95;
+  border-bottom: 1px solid var(--global-border-color);
   background-color: var(--global-bg-color);
+  padding: 0.75rem 0;
+  transition: all 0.3s ease;
 }
 .navbar.navbar-light {
-  // Remove link decoration
   a {
     &:hover {
       text-decoration: none;
+      border-bottom: none;
     }
   }
   .navbar-brand {
     color: var(--global-text-color);
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
   }
   .navbar-nav .nav-item .nav-link {
-    color: var(--global-text-color);
+    color: var(--global-text-muted);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
     &:hover {
-      color: var(--global-hover-color);
+      color: var(--global-theme-color);
+      background-color: rgba(37, 99, 235, 0.06);
+      border-bottom: none;
     }
   }
   .navbar-nav .nav-item.active>.nav-link {
-      background-color: inherit;
-      font-weight: bolder;
+      background-color: rgba(37, 99, 235, 0.08);
+      font-weight: 600;
       color: var(--global-theme-color);
       &:hover {
         color: var(--global-hover-color);
@@ -113,6 +150,7 @@ a, table.table a {
     a {
       &:hover {
         color: var(--global-hover-color);
+        border-bottom: none;
       }
     }
   }
@@ -156,30 +194,60 @@ a, table.table a {
 
 // News
 
-.news table td {
-  font-size: 1rem;
-  color: var(--global-text-color);
-}
+.news table {
+  border-collapse: separate;
+  border-spacing: 0;
 
-.news table th {
-  color: var(--global-text-color);
+  td {
+    font-size: 0.95rem;
+    color: var(--global-text-color);
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid var(--global-border-color);
+    line-height: 1.6;
+  }
+
+  th {
+    color: var(--global-text-muted);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--global-border-color);
+  }
+
+  tr {
+    transition: background-color 0.15s ease;
+    &:hover td {
+      background-color: rgba(37, 99, 235, 0.03);
+    }
+  }
 }
 
 // Social (bottom)
 
 .social {
   text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--global-border-color);
   .contact-icon {
-    font-size: 4rem;
+    font-size: 3rem;
     a {
       color: var(--global-icon-color);
+      margin: 0 0.4rem;
+      transition: all 0.25s ease;
       &:hover {
         color: var(--global-theme-color);
+        transform: translateY(-3px);
+        border-bottom: none;
       }
     }
   }
   .contact-note {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    color: var(--global-text-muted);
+    margin-top: 0.75rem;
   }
 }
 
@@ -187,39 +255,43 @@ a, table.table a {
 // Footer
 footer.fixed-bottom {
   background-color: var(--global-footer-bg-color);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   .container {
     color: var(--global-footer-text-color);
-    padding-top: 9px;
-    padding-bottom: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
   a {
     color: var(--global-footer-link-color);
     &:hover {
-      color: pink;
+      color: var(--global-theme-color);
       text-decoration: none;
+      border-bottom: none;
     }
   }
 }
 
 footer.sticky-bottom {
-  border-top: 1px solid $grey-color-light;
+  border-top: 1px solid var(--global-border-color);
   padding-top: 40px;
   padding-bottom: 40px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: var(--global-text-muted);
 }
 
 
 // Blog
 
 .header-bar {
-  border-bottom: 1px solid $grey-color-light;
+  border-bottom: 1px solid var(--global-border-color);
   text-align: center;
-  padding-top: 2rem;
+  padding-top: 3rem;
   padding-bottom: 5rem;
   h1 {
     color: var(--global-theme-color);
-    font-size: 5rem;
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
   }
 }
 
@@ -228,20 +300,27 @@ footer.sticky-bottom {
   margin-bottom: 40px;
   padding: 0;
   li {
-    border-bottom: 1px solid $grey-color-light;
+    border-bottom: 1px solid var(--global-border-color);
     list-style: none;
     padding-top: 2rem;
     padding-bottom: 2rem;
+    transition: background-color 0.15s ease;
+    &:hover {
+      background-color: rgba(37, 99, 235, 0.02);
+    }
     .post-meta {
-      color: $grey-color;
-      font-size: 0.875rem;
-      margin-bottom: 0;
+      color: var(--global-text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
     }
     a {
       color: var(--global-text-color);
       text-decoration: none;
+      font-weight: 500;
       &:hover {
         color: var(--global-theme-color);
+        border-bottom: none;
       }
     }
   }
@@ -251,14 +330,21 @@ footer.sticky-bottom {
   .page-item {
     .page-link {
       color: var(--global-text-color);
+      border: 1px solid var(--global-border-color);
+      border-radius: 8px;
+      margin: 0 2px;
+      transition: all 0.2s ease;
       &:hover {
-        color: $black-color;
+        color: var(--global-theme-color);
+        border-color: var(--global-theme-color);
+        background-color: rgba(37, 99, 235, 0.06);
       }
     }
     &.active .page-link {
       background-color: var(--global-theme-color);
+      border-color: var(--global-theme-color);
       &:hover {
-        background-color: var(--global-theme-color);
+        background-color: var(--global-hover-color);
       }
     }
   }
@@ -279,18 +365,46 @@ footer.sticky-bottom {
 
 .projects {
   .grid-item {
-    width: 250px;
-    margin-bottom: 10px;
+    width: 280px;
+    margin-bottom: 1.5rem;
     a {
-      color: black;
+      color: var(--global-text-color);
       text-decoration: none;
       &:hover {
         color: var(--global-theme-color);
+        border-bottom: none;
       }
     }
   }
-  .card img {
-    width: 100%;
+  .card {
+    border: 1px solid var(--global-border-color);
+    border-radius: 12px;
+    background-color: var(--global-card-bg);
+    box-shadow: var(--global-shadow);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    &:hover {
+      box-shadow: var(--global-shadow-lg);
+      transform: translateY(-4px);
+      border-color: var(--global-theme-color);
+    }
+    img {
+      width: 100%;
+      border-bottom: 1px solid var(--global-border-color);
+    }
+    .card-body {
+      padding: 1.25rem;
+    }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .card-text {
+      font-size: 0.875rem;
+      color: var(--global-text-muted);
+      line-height: 1.6;
+    }
   }
 }
 
@@ -305,6 +419,7 @@ footer.sticky-bottom {
     text-align: center;
     margin-top: 1em;
     margin-bottom: 1em;
+    font-weight: 700;
   }
   h2 {
     margin-bottom: 1rem;
@@ -313,12 +428,15 @@ footer.sticky-bottom {
     }
   }
   h2.year {
-    color: $grey-color-light;
-    border-top: 1px solid $grey-color-light;
+    color: var(--global-text-muted);
+    border-top: 1px solid var(--global-border-color);
     padding-top: 1rem;
     margin-top: 2rem;
     margin-bottom: -2rem;
     text-align: right;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
   }
   ol.bibliography {
     list-style: none;
@@ -326,7 +444,13 @@ footer.sticky-bottom {
     margin-top: 0;
 
     li {
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
+      padding: 1rem;
+      border-radius: 8px;
+      transition: background-color 0.15s ease;
+      &:hover {
+        background-color: rgba(37, 99, 235, 0.03);
+      }
       .abbr {
         height: 2rem;
         margin-bottom: 0.5rem;
@@ -335,22 +459,29 @@ footer.sticky-bottom {
           background-color: var(--global-theme-color);
           padding-left: 1rem;
           padding-right: 1rem;
+          border-radius: 4px;
+          font-size: 0.8rem;
+          font-weight: 600;
           a {
             color: white;
             &:hover {
               text-decoration: none;
+              border-bottom: none;
             }
           }
         }
         .award {
           color: var(--global-theme-color) !important;
           border: 1px solid var(--global-theme-color);
+          border-radius: 4px;
         }
       }
       .title {
-        font-weight: bolder;
+        font-weight: 600;
+        line-height: 1.4;
       }
       .author {
+        color: var(--global-text-muted);
         a {
           border-bottom: 1px dashed var(--global-theme-color);
           &:hover {
@@ -361,19 +492,22 @@ footer.sticky-bottom {
         > em {
           border-bottom: 1px solid;
           font-style: normal;
+          font-weight: 600;
         }
       }
       .links {
         a.btn {
           color: var(--global-text-color);
-          border: 1px solid var(--global-text-color);
-          padding-left: 1rem;
-          padding-right: 1rem;
-          padding-top: 0.25rem;
-          padding-bottom: 0.25rem;
+          border: 1px solid var(--global-border-color);
+          padding: 0.3rem 1rem;
+          border-radius: 6px;
+          font-size: 0.85rem;
+          font-weight: 500;
+          transition: all 0.2s ease;
           &:hover {
             color: var(--global-theme-color);
             border-color: var(--global-theme-color);
+            background-color: rgba(37, 99, 235, 0.06);
           }
         }
       }
@@ -382,14 +516,10 @@ footer.sticky-bottom {
         max-height: 0px;
         overflow: hidden;
         text-align: justify;
-        -webkit-transition: 0.15s ease;
-        -moz-transition: 0.15s ease;
-        -ms-transition: 0.15s ease;
-        -o-transition: 0.15s ease;
-        transition: all 0.15s ease;
+        transition: all 0.25s ease;
 
         p {
-          line-height: 1.4em;
+          line-height: 1.6;
           margin: 10px;
         }
         pre {
@@ -400,17 +530,14 @@ footer.sticky-bottom {
       }
       .hidden.open {
         max-height: 100em;
-        -webkit-transition: 0.15s ease;
-        -moz-transition: 0.15s ease;
-        -ms-transition: 0.15s ease;
-        -o-transition: 0.15s ease;
-        transition: all 0.15s ease;
+        transition: all 0.25s ease;
       }
       div.abstract.hidden {
-        border: dashed 1px var(--global-bg-color);
+        border: dashed 1px var(--global-border-color);
+        border-radius: 6px;
       }
       div.abstract.hidden.open {
-        border-color: var(--global-text-color);
+        border-color: var(--global-theme-color);
       }
     }
   }
@@ -419,7 +546,12 @@ footer.sticky-bottom {
 // Rouge Color Customization
 code {
   color: var(--global-theme-color);
+  font-size: 0.9em;
+  background-color: rgba(37, 99, 235, 0.06);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
 }
+
 // Transitioning Themes
 html.transition,
 html.transition *,

@@ -1,16 +1,21 @@
 /*******************************************************************************
  * Themes
  ******************************************************************************/
- 
+
 :root {
-  --global-bg-color: #{$white-color};
+  --global-bg-color: #fafafa;
   --global-text-color: #{$black-color};
-  --global-theme-color: #{$purple-color};
-  --global-hover-color: #{$light-purple-color};
+  --global-text-muted: #{$grey-color};
+  --global-theme-color: #{$blue-color};
+  --global-hover-color: #{$blue-color-dark};
   --global-footer-bg-color: #{$grey-color-dark};
-  --global-footer-text-color: #{$grey-color-light};
+  --global-footer-text-color: #9ca3af;
   --global-footer-link-color: #{$white-color};
-  --global-icon-color: #{$grey-color-dark};
+  --global-icon-color: #{$grey-color};
+  --global-card-bg: #{$white-color};
+  --global-border-color: #{$grey-color-light};
+  --global-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --global-shadow-lg: 0 10px 25px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.04);
 
   .fa-sun {
     display : none;
@@ -23,14 +28,19 @@
 }
 
 html[data-theme='dark'] {
-  --global-bg-color: #{$grey-color-dark};
-  --global-text-color: #{$grey-color-light};
-  --global-theme-color: #{$cyan-color};
-  --global-hover-color: #{$light-cyan-color};
-  --global-footer-bg-color: #{$grey-color-light};
-  --global-footer-text-color: #{$grey-color-dark};
-  --global-footer-link-color: #{$black-color};
-  --global-icon-color: navajowhite;
+  --global-bg-color: #0f172a;
+  --global-text-color: #e2e8f0;
+  --global-text-muted: #94a3b8;
+  --global-theme-color: #818cf8;
+  --global-hover-color: #a5b4fc;
+  --global-footer-bg-color: #020617;
+  --global-footer-text-color: #64748b;
+  --global-footer-link-color: #e2e8f0;
+  --global-icon-color: #94a3b8;
+  --global-card-bg: #1e293b;
+  --global-border-color: #334155;
+  --global-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --global-shadow-lg: 0 10px 25px rgba(0,0,0,0.4), 0 4px 10px rgba(0,0,0,0.3);
 
   .fa-sun {
     padding-left: 10px;
