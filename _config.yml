@@ -8,7 +8,7 @@ middle_name: M.
 last_name: Bagmar
 email: aadeshbagmar@gmail.com
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  The Academic Life of Aadesh M Bagmar
+  Software Engineer at Microsoft AI — Distributed Systems, Security, and Supply Chain Attacks
 footer_text: >
   Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
@@ -56,7 +56,7 @@ keybase_username: # your keybase user name
 wikidata_id: # your wikidata id
 
 contact_note: >
-  You can reach me at aadesh@umd.edu
+  You can reach me at aadeshbagmar@gmail.com
 
 google_analytics: UA-XXXXXXXXX # out your google-analytics code
 panelbear_analytics: XXXXXXXXX # panelbear analytics site ID
