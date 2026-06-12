@@ -22,4 +22,4 @@ Previously, I interned at [Netflix](https://www.netflix.com) with the Customer T
 
 I received my Master's degree in Computer Science (4.0 GPA) from the [University of Maryland](https://www.cs.umd.edu/) in 2021, where I worked as a Research Assistant with [Prof. Jim Purtilo](https://seam.cs.umd.edu/purtilo/) in the [SEAM lab](https://seam.cs.umd.edu/team). My undergraduate degree in Computer Science is from [National Institute of Technology, Surat](https://www.svnit.ac.in/web/department/computer/btechnew.php) (2016), where I worked on Computer Vision with [Prof. M.A. Zaveri](https://svnit.ac.in/maz/).
 
-I moonlight as a close-up magician and a musician during my free time. I love hosting people on my [podcast](https://www.youtube.com/watch?v=7X3NYEAofUQ) where we talk philosophy.
+I love doing close-up magic and playing music during my free time. I also love hosting people on my [podcast](https://www.youtube.com/watch?v=7X3NYEAofUQ) where we talk philosophy.
