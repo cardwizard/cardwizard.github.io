@@ -1,27 +1,9 @@
-{% if site.footer_fixed %}
-<footer class="fixed-bottom">
-  <div class="container mt-0">
-    &copy; Copyright {{ site.time | date: '%Y' }} {{ site.first_name }} {{ site.middle_name }} {{ site.last_name }}.
-    {{ site.footer_text }}
-    {% if site.impressum_path %}
-    <a href="{{ site.url }}{{ site.baseurl }}{{ site.impressum_path }}">Impressum</a>.
-    {% endif %}
-    {% if site.last_updated %}
-    Last updated: {{ "now" | date: '%B %d, %Y' }}.
-    {% endif %}
-  </div>
+<footer id="contact" class="notebook-footer">
+  <p>{{ site.first_name }} {{ site.middle_name }} {{ site.last_name }} <span aria-hidden="true"> / </span> aadeshbagmar @ [gmail] [dot] [com]</p>
+  <nav aria-label="Social links">
+    <a href="https://github.com/{{ site.github_username }}">GitHub</a>
+    <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}/">LinkedIn</a>
+    <a href="https://scholar.google.com/citations?user={{ site.scholar_userid }}&amp;hl=en">Google Scholar</a>
+  </nav>
+  <p class="small muted">&copy; {{ site.time | date: '%Y' }} Aadesh M. Bagmar. Built with Jekyll. Hosted on GitHub Pages.</p>
 </footer>
-{% else %}
-<footer class="sticky-bottom mt-5">
-  <div class="container">
-    &copy; Copyright {{ site.time | date: '%Y' }} {{ site.first_name }} {{ site.middle_name }} {{ site.last_name }}.
-    {{ site.footer_text }}
-    {% if site.impressum_path %}
-    <a href="{{ site.url }}{{ site.baseurl }}{{ site.impressum_path }}">Impressum</a>.
-    {% endif %}
-    {% if site.last_updated %}
-    Last updated: {{ "now" | date: '%B %d, %Y' }}.
-    {% endif %}
-  </div>
-</footer>
-{% endif %}

@@ -1,72 +1,16 @@
-<header>
-
-    <!-- Nav Bar -->
-    <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}">
-    <div class="container">
-      {% if page.title != "about" %}
-      <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl | prepend: site.url }}/">
-       {% if site.title == blank %}{{ site.title }}{% else %}<span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}  {{ site.last_name }}{% endif %}
-      </a>
-      {% elsif site.show_social_icons %}
-        <!-- Social Icons -->
-        <div class="row ml-1 ml-sm-0">
-          {% include social.html %}
-        </div>
-      {% endif %}
-      <!-- Navbar Toggle -->
-      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar top-bar"></span>
-        <span class="icon-bar middle-bar"></span>
-        <span class="icon-bar bottom-bar"></span>
-      </button>
-      <div class="collapse navbar-collapse text-right" id="navbarNav">
-        <ul class="navbar-nav ml-auto flex-nowrap">
-          <!-- About -->
-          <li class="nav-item {% if page.title == 'about' %}active{% endif %}">
-            <a class="nav-link" href="{{ '/' | relative_url }}">
-              about
-              {% if page.title == "about" %}
-                <span class="sr-only">(current)</span>
-              {% endif %}
-            </a>
-          </li>
-          {% if site.blog_name %}
-          <!-- Blog -->
-          <li class="nav-item {% if page.url contains 'blog' %}active{% endif %}">
-            <a class="nav-link" href="{{ '/blog/' | relative_url }}">
-              blog
-              {% if page.title == "blog" %}
-              <span class="sr-only">(current)</span>
-              {% endif %}
-            </a>
-          </li>
-          {% endif %}
-          <!-- Other pages -->
-          {% assign sorted_pages = site.pages | sort: "title" %}
-          {% for p in sorted_pages %}
-          {% if p.nav and p.autogen == nil %}
-          <li class="nav-item {% if page.title == p.title %}active{% endif %}">
-              <a class="nav-link" href="{{ p.url | relative_url }}">
-                {{ p.title }}
-                {% if page.title == p.title %}
-                <span class="sr-only">(current)</span>
-                {% endif %}
-              </a>
-          </li>
-          {% endif %}
-          {% endfor %}
-          {% if site.enable_darkmode %}
-            <div class = "toggle-container">
-              <a id = "light-toggle">
-                  <i class="fas fa-moon"></i>
-                  <i class="fas fa-sun"></i>
-              </a>
-            </div>
-          {% endif %}
-        </ul>
-      </div>
-    </div>
+<aside class="notebook-margin">
+  <a class="notebook-mark" href="{{ '/' | relative_url }}" aria-label="Aadesh Bagmar home"><span aria-hidden="true">&nearr;</span></a>
+  <a class="signature" href="{{ '/' | relative_url }}">{{ site.first_name }}<br>{{ site.middle_name }} {{ site.last_name }}</a>
+  <p class="margin-note">Software engineer.<br>Magic, music &amp; ideas.</p>
+  <nav aria-label="Primary">
+    <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>About me</a>
+    <a href="{{ '/research-paper-cuts/' | relative_url }}"{% if page.url contains '/research-paper-cuts/' %} aria-current="page"{% endif %}>Research Paper Cuts</a>
+    <a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog/' %} aria-current="page"{% endif %}>Writing</a>
+    <a href="{{ '/projects/' | relative_url }}"{% if page.url contains '/projects/' %} aria-current="page"{% endif %}>Projects</a>
+    <a href="{{ '/publications/' | relative_url }}"{% if page.url contains '/publications/' %} aria-current="page"{% endif %}>Publications</a>
+    <a href="{{ '/news/' | relative_url }}"{% if page.url contains '/news/' %} aria-current="page"{% endif %}>News</a>
+    <a href="{{ '/now/' | relative_url }}"{% if page.url contains '/now/' %} aria-current="page"{% endif %}>Now</a>
+    <a href="#contact">Contact</a>
   </nav>
-
-</header>
+  <a class="scholar-link" href="https://scholar.google.com/citations?user={{ site.scholar_userid }}&amp;hl=en">Google Scholar &nearr;</a>
+</aside>

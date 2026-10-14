@@ -1,31 +1,22 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html lang="en" data-theme="light">
   <head>
     {% include head.html %}
     {% include scripts/mathjax.html %}
   </head>
-
-  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
-
-    <!-- Header -->
-
-    {% include header.html %}
-
-    <!-- Content -->
-
-    <div class="container mt-5">
-      {{ content }}
+  <body>
+    <!-- THESIS: A personal field notebook, with research and work kept in view.
+    OWN-WORLD: warm paper, rose annotations, an open margin, clear sans-serif type.
+    STORY: Meet Aadesh, inspect the work, follow the papers and explanations.
+    FIRST VIEWPORT: author index beside an open reading spread.
+    FORM: approved Field Notebook; shared across every page and content type. -->
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="notebook">
+      {% include header.html %}
+      <div class="notebook-page">
+        <main id="main" tabindex="-1">{{ content }}</main>
+        {% include footer.html %}
+      </div>
     </div>
-
-    <!-- Footer -->
-
-    {% include footer.html %}
-
   </body>
-
-  {% include scripts/bootstrap.html %}
-  {% include scripts/mansory.html %}
-  {% include scripts/misc.html %}
-
 </html>

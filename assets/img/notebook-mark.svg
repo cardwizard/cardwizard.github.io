@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <style>:root{--cp-bg:#f7f4ef;--cp-accent:#b11f4b}</style>
+  <rect x="1" y="1" width="46" height="46" rx="10" fill="var(--cp-bg)" stroke="var(--cp-accent)" stroke-dasharray="4 3"/>
+  <path d="m15 33 18-18m-14 0h14v14" fill="none" stroke="var(--cp-accent)" stroke-width="3"/>
+</svg>

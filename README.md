@@ -1,4 +1,48 @@
-# al-folio
+# Aadesh Bagmar's Field Notebook
+
+This site uses a light-only Field Notebook theme across About, writing,
+projects, publications, news, and Research Paper Cuts. See `DESIGN.md` for
+the visual rules. All existing blog and project URLs remain unchanged.
+
+With Ruby 3.3 installed:
+
+```sh
+bundle install
+bundle exec jekyll serve
+```
+
+For a production build, use `JEKYLL_ENV=production bundle exec jekyll build`.
+Dependencies are locked in `Gemfile.lock`; Jekyll Scholar renders every year
+in `_bibliography/papers.bib`, without a hand-maintained year list.
+
+Edit `_pages/about.md` for the bio, `_news/` for dated milestones, `_posts/`
+for writing, and `_projects/` for project notes. The Scholar identifier is
+configured in `_config.yml`. Only add publication metadata or news supported
+by a source; do not embed changing citation counts.
+
+After preview approval, push `source`, then publish the production `_site/`
+output to `gh-pages`, the branch configured for this repository's GitHub
+Pages site. Build before running these commands, and use a fresh sibling
+directory for the temporary publishing worktree:
+
+```sh
+git fetch origin
+git worktree add --detach ../site-pages origin/gh-pages
+rsync -a --delete --exclude=.git _site/ ../site-pages/
+touch ../site-pages/.nojekyll
+git -C ../site-pages add --all
+git -C ../site-pages commit -m "Publish Field Notebook"
+git -C ../site-pages push origin HEAD:gh-pages
+git worktree remove ../site-pages
+```
+
+This preserves deployment history and never force-pushes. Do not use the
+legacy `bin/deploy` script, which deletes source-checkout contents. The old
+Deploy workflow targets `master`, not the configured `gh-pages` branch;
+automatic deployment is not yet repaired because the available OAuth
+credential cannot update workflows without the `workflow` scope.
+
+## Original al-folio theme documentation
 
 [![build status](https://travis-ci.org/alshedivat/al-folio.svg?branch=master)](https://travis-ci.org/alshedivat/al-folio)
 [![demo](https://img.shields.io/badge/theme-demo-brightgreen.svg)](https://alshedivat.github.io/al-folio/)

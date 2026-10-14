@@ -28,7 +28,7 @@ in the industry to defend against such attacks
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        <a href="http://www.arxiv-vanity.com/papers/2102.06301/"> <img class="img-fluid rounded z-depth-1" 
+        <a href="https://arxiv.org/abs/2102.06301"> <img class="img-fluid rounded z-depth-1"
         src="{{ '/assets/img/QLeEVLC_.jpg' | relative_url }}" alt="" 
         title="Arxiv Link"/> </a>
     </div>

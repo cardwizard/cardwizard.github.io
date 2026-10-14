@@ -1,48 +1,64 @@
 ---
 layout: default
 ---
-
-<div class="post">
-
-  <header class="post-header">
-    <h1 class="post-title">
-     {% if site.title == blank %}{{ site.title }}{% else %}<span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}  {{ site.last_name }}{% endif %}
-    </h1>
-     <p class="desc">{{ page.description }}</p>
-  </header>
-
-  <article>
-    {% if page.profile %}
-    <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
-      {% if page.profile.image %}
-        <img class="img-fluid z-depth-1 rounded" src="{{ page.profile.image | prepend: '/assets/img/' | relative_url }}">
-      {% endif %}
-      {% if page.profile.address %}
-        <div class="address">
-          {{ page.profile.address }}
-        </div>
-      {% endif %}
+<section class="intro">
+  <div>
+    <h1>Hello, I'm Aadesh.</h1>
+    {{ page.intro | markdownify }}
+    <div class="link-row">
+      <a href="#research">Open the notebook <span aria-hidden="true">&darr;</span></a>
+      <a href="{{ '/now/' | relative_url }}">What I'm doing now</a>
     </div>
-    {% endif %}
-
-    <div class="clearfix">
-      {{ content }}
+  </div>
+  <figure>
+    <img class="portrait" src="{{ page.profile.image | prepend: '/assets/img/' | relative_url }}" alt="Aadesh Bagmar" width="180" height="228">
+    <figcaption class="small muted">Redmond, WA</figcaption>
+  </figure>
+</section>
+<section class="spread" id="research">
+  <div class="research-spread">
+    <div>
+      <h2>Research<br>Paper Cuts<span class="accent">.</span></h2>
+      <p>Research papers, explained one idea at a time.</p>
+      <p class="small muted">Short videos. Paper evidence.<br>Room for the questions that matter.</p>
+      <div class="link-row"><a href="{{ '/research-paper-cuts/' | relative_url }}">Explore the series &nearr;</a></div>
     </div>
-
-    {% if page.news %}
-      {% include news.html %}
-    {% endif %}
-
-    {% if page.selected_papers %}
-      {% include selected_papers.html %}
-    {% endif %}
-
-    {% if page.social %}
-    <div class="social">
-      {% include social.html %}
-      <div class="contact-note">{{ site.contact_note }}</div>
-    </div>
-    {% endif %}
-  </article>
-
-</div>
+    {% include paper-cuts.svg %}
+  </div>
+  <p class="episode-note"><strong>CausalArmor</strong> &mdash; a research paper explainer in preparation.</p>
+</section>
+<section class="spread">
+  <div class="section-heading"><h2>From the archive</h2><a href="{{ '/blog/' | relative_url }}">All writing &nearr;</a></div>
+  <ul class="entry-list">
+    {% for post in site.posts limit: 3 %}
+    <li>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%B %-d, %Y' }}</time>
+      <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+      <p class="small muted">{{ post.description }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+<section class="spread">
+  <div class="section-heading"><h2>Things I've built</h2><a href="{{ '/projects/' | relative_url }}">All projects &nearr;</a></div>
+  <ul class="entry-list">
+    {% assign projects = site.projects | sort: 'importance' %}
+    {% for project in projects limit: 3 %}
+    <li><h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3><p class="muted">{{ project.description }}</p></li>
+    {% endfor %}
+  </ul>
+</section>
+<section class="spread">
+  <div class="section-heading"><h2>Published research</h2><a href="{{ '/publications/' | relative_url }}">All publications &nearr;</a></div>
+  <p>From Python package security and privacy in neural networks to conversational agents and group decision-making.</p>
+  <p>My latest paper with Pushkar Saraf, <a href="https://arxiv.org/abs/2607.15143">Setup Complete, Now You Are Compromised</a>, studies supply-chain attacks delivered through AI coding agents' setup instructions.</p>
+  <div class="link-row"><a href="https://scholar.google.com/citations?user={{ site.scholar_userid }}&amp;hl=en">Follow the research on Google Scholar &nearr;</a></div>
+</section>
+<section class="spread prose" id="background">
+  <h2>A little background</h2>
+  {{ content }}
+</section>
+<section class="spread">
+  <div class="section-heading"><h2>News &amp; milestones</h2><a href="{{ '/news/' | relative_url }}">All news &nearr;</a></div>
+  {% include news.html limit=site.news_limit %}
+</section>
