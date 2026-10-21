@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title }} | {{ site.first_name }} {{ site.middle_name }} {{ site.last_name }}</title>
+<meta name="description" content="{{ page.description }}">
+<link rel="icon" type="image/svg+xml" href="{{ '/assets/img/notebook-mark.svg' | relative_url }}">
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #f7f4ef; color: #1c1a17; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  .edition-chrome { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1.5rem; padding: 0.9rem 1.25rem; border-bottom: 1px solid #ddd6c9; background: #fbf9f5; }
+  .edition-brand { font-weight: 700; color: inherit; text-decoration: none; letter-spacing: 0.01em; }
+  .edition-chrome nav { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; font-size: 0.92rem; }
+  .edition-chrome nav a { color: inherit; text-decoration: none; }
+  .edition-chrome nav a:hover, .edition-chrome nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 3px; }
+  main { display: block; }
+  .edition-head { max-width: 72rem; margin: 0 auto; padding: 1.6rem 1.25rem 1rem; }
+  .edition-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.08; margin: 0 0 0.5rem; letter-spacing: -0.01em; }
+  .edition-dek { margin: 0; color: #55504a; font-size: 1.05rem; line-height: 1.5; }
+  .edition-frame { display: block; width: 100%; height: max(620px, calc(100dvh - 190px)); border: 0; border-top: 1px solid #ddd6c9; border-bottom: 1px solid #ddd6c9; background: #fff; }
+  .edition-text { max-width: 46rem; margin: 0 auto; padding: 2rem 1.25rem 3rem; font-size: 1.05rem; line-height: 1.7; }
+  .edition-text h2 { font-size: 1.5rem; margin: 2.2rem 0 0.6rem; line-height: 1.2; }
+  .edition-text h2:first-child { margin-top: 0; }
+  .edition-text a { color: #8a3324; }
+  .edition-foot { border-top: 1px solid #ddd6c9; padding: 1.1rem 1.25rem 1.6rem; color: #55504a; font-size: 0.92rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; }
+  .edition-foot a { color: inherit; }
+</style>
+</head>
+<body>
+<header class="edition-chrome">
+  <a class="edition-brand" href="{{ '/' | relative_url }}">{{ site.first_name }} {{ site.middle_name }} {{ site.last_name }}</a>
+  <nav aria-label="Primary">
+    <a href="{{ '/' | relative_url }}">About me</a>
+    <a href="{{ '/research-paper-cuts/' | relative_url }}">Research Paper Cuts</a>
+    <a href="{{ '/newspaper/' | relative_url }}" aria-current="page">Newspaper</a>
+    <a href="{{ '/blog/' | relative_url }}">Writing</a>
+    <a href="{{ '/projects/' | relative_url }}">Projects</a>
+    <a href="{{ '/publications/' | relative_url }}">Publications</a>
+    <a href="{{ '/news/' | relative_url }}">News</a>
+    <a href="{{ '/now/' | relative_url }}">Now</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+<main>
+  <div class="edition-head">
+    <h1>{{ page.title }}</h1>
+    <p class="edition-dek">{{ page.description }}</p>
+  </div>
+  {% assign edition_date = page.date | date: "%Y-%m-%d" %}
+  <iframe class="edition-frame" src="{{ '/newspaper/' | append: edition_date | append: '/edition.html' | relative_url }}" title="Research Paper Cuts Daily newspaper edition for {{ edition_date }}" loading="eager"></iframe>
+  <section class="edition-text" aria-label="Text version of this edition">
+    <h2>Text version</h2>
+    {{ content }}
+  </section>
+</main>
+<footer class="edition-foot" id="contact">
+  <span>{{ site.first_name }} {{ site.middle_name }} {{ site.last_name }}</span>
+  <a href="{{ '/newspaper/' | relative_url }}">All editions</a>
+  <a href="https://github.com/cardwizard">GitHub</a>
+  <a href="https://www.linkedin.com/in/aadeshbagmar">LinkedIn</a>
+</footer>
+</body>
+</html>
