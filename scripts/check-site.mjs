@@ -133,9 +133,20 @@ try {
         if (!edition.expectedStories || edition.expectedStories !== edition.visibleStories) report.regressions.push(`${prefix}: missing or hidden stories in ${edition.date}`);
       }
       if (!current.newspaperEditions.length && !(current.route === '/newspaper/' && current.archiveEmpty)) report.regressions.push(`${prefix}: newspaper contains no editions.`);
+      const datedRoute = current.route.match(/^\/newspaper\/(\d{4}-\d{2}-\d{2})\//);
+      if (datedRoute && (current.newspaperEditions.length !== 1 || current.newspaperEditions[0].date !== datedRoute[1])) report.regressions.push(`${prefix}: dated URL shows the wrong edition.`);
       if (current.route === '/newspaper/') {
         const index = JSON.parse(await readFile('_data/newspaper_archive.json', 'utf8'));
         const expectedDates = index.editions.map(edition => edition.date).sort().reverse();
+        const asOf = new Date(`${index.asOf}T00:00:00Z`);
+        if (index.schemaVersion !== 1 || index.retainDays !== 30 || !Number.isFinite(asOf.valueOf()) || asOf.toISOString().slice(0, 10) !== index.asOf) {
+          report.regressions.push(`${prefix}: invalid 30-day archive configuration.`);
+        } else {
+          asOf.setUTCDate(asOf.getUTCDate() - 29);
+          const firstDate = asOf.toISOString().slice(0, 10);
+          const builtDates = editions.filter(date => date >= firstDate && date <= index.asOf).sort().reverse();
+          if (JSON.stringify(expectedDates) !== JSON.stringify(builtDates)) report.regressions.push(`${prefix}: archive index omits or adds a published edition in its active window.`);
+        }
         if (JSON.stringify(current.newspaperEditions.map(edition => edition.date)) !== JSON.stringify(expectedDates)) report.regressions.push(`${prefix}: scrolling feed does not match the active archive.`);
         if (current.archiveAsOf !== index.asOf) report.regressions.push(`${prefix}: archive date is missing or inconsistent.`);
       }
