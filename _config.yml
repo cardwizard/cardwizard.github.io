@@ -90,6 +90,9 @@ collections:
   projects:
     output: true
     permalink: /projects/:path/
+  newspapers:
+    output: true
+    permalink: /newspaper/:path/
 
 news_limit: 6
 
