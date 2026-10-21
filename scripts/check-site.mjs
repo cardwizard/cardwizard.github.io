@@ -35,14 +35,17 @@ async function serve(directory) {
 const routes = ['/', '/blog/', '/projects/', '/publications/', '/news/', '/now/', '/research-paper-cuts/', '/blog/2026/causalarmor/', '/newspaper/'];
 const editions = (await readdir(join(currentRoot, 'newspaper'), {withFileTypes: true}))
   .filter(entry => entry.isDirectory() && /^\d{4}-\d{2}-\d{2}$/.test(entry.name)).map(entry => entry.name).sort();
-if (editions.length) routes.push(`/newspaper/${editions.at(-1)}/`);
+if (editions.length) {
+  routes.push(`/newspaper/${editions.at(-1)}/`);
+  routes.push(`/newspaper/${editions.at(-1)}/edition.html`);
+}
 const screenshotRoutes = new Set(['/', '/blog/', '/projects/', '/publications/', '/newspaper/']);
 const report = {baseline: [], current: [], regressions: [], externalRequestsBlocked: true};
 const servers = [];
 let browser;
 
 async function inspect(origin, label, route, width) {
-  const page = await browser.newPage({viewport: {width, height: 900}, reducedMotion: 'reduce'});
+  const page = await browser.newPage({viewport: {width, height: 900}, reducedMotion: 'reduce', colorScheme: 'dark'});
   const jsErrors = [];
   const failedResources = [];
   page.on('pageerror', error => jsErrors.push(error.message));
@@ -74,7 +77,20 @@ async function inspect(origin, label, route, width) {
       mainTextLength: document.querySelector('main')?.textContent.trim().length ?? 0,
       overflow: document.documentElement.scrollWidth > innerWidth + 1,
       navigation: [...document.querySelectorAll('nav[aria-label="Primary"] a')].map(link => link.getAttribute('href')),
-      newspaperNavigation: !!document.querySelector('nav[aria-label="Primary"] a[href="/newspaper/"]')
+      newspaperNavigation: !!document.querySelector('nav[aria-label="Primary"] a[href="/newspaper/"]'),
+      plainNewspaper: !!document.querySelector('main.newspaper-stream'),
+      newspaperControls: document.querySelectorAll('iframe,button,select,details,nav').length,
+      duplicateWrapper: !!document.querySelector('.edition-head,.edition-dek,.edition-text,.edition-chrome'),
+      background: getComputedStyle(document.body).backgroundColor,
+      colorScheme: document.documentElement.dataset.theme,
+      newspaperEditions: [...document.querySelectorAll('.edition')].map(edition => ({
+        date: edition.dataset.editionDate,
+        expectedStories: Number(edition.dataset.storyCount),
+        visibleStories: [...edition.querySelectorAll('article')].filter(article => article.getClientRects().length > 0).length
+      })),
+      archiveAsOf: document.querySelector('main.newspaper-stream')?.dataset.archiveAsOf,
+      archiveEmpty: !!document.querySelector('.archive-empty'),
+      nestedScrollers: [...document.querySelectorAll('body *')].filter(element => ['auto', 'scroll'].includes(getComputedStyle(element).overflowY) && element.scrollHeight > element.clientHeight + 1).length
     }));
     const result = {route, width, status: response.status(), ...state, jsErrors, failedResources, brokenImages};
     if (screenshotRoutes.has(route)) {
@@ -84,8 +100,8 @@ async function inspect(origin, label, route, width) {
     if (label === 'current' && route === '/' && width === 390 && state.newspaperNavigation) {
       await page.getByRole('navigation', {name: 'Primary'}).getByRole('link', {name: 'Newspaper', exact: true}).click();
       await page.waitForURL(`${origin}/newspaper/`);
-      if (!(await page.getByRole('heading', {name: 'Newspaper', exact: true}).isVisible())) {
-        result.jsErrors.push('Newspaper navigation did not show its heading.');
+      if (!(await page.locator('main.newspaper-stream .newspaper-name').first().isVisible())) {
+        result.jsErrors.push('Newspaper navigation did not open the newspaper directly.');
       }
     }
     return result;
@@ -109,9 +125,36 @@ try {
     if (current.status !== 200) report.regressions.push(`${prefix}: HTTP ${current.status}`);
     if (!current.heading || current.mainTextLength < 40) report.regressions.push(`${prefix}: missing or empty main content.`);
     if (current.overflow && !baseline.overflow) report.regressions.push(`${prefix}: new horizontal overflow.`);
-    if (!current.newspaperNavigation) report.regressions.push(`${prefix}: Newspaper is missing from the custom navigation.`);
-    for (const link of baseline.navigation) {
-      if (!current.navigation.includes(link)) report.regressions.push(`${prefix}: removed existing navigation link ${link}`);
+    if (current.route.startsWith('/newspaper/')) {
+      if (!current.plainNewspaper) report.regressions.push(`${prefix}: plain newspaper content is missing.`);
+      if (current.newspaperControls || current.duplicateWrapper || current.nestedScrollers) report.regressions.push(`${prefix}: controls, duplicate text, iframe or nested scrolling returned.`);
+      if (current.background !== 'rgb(255, 255, 255)' || current.colorScheme !== 'light') report.regressions.push(`${prefix}: newspaper must remain light even with a dark OS preference.`);
+      for (const edition of current.newspaperEditions) {
+        if (!edition.expectedStories || edition.expectedStories !== edition.visibleStories) report.regressions.push(`${prefix}: missing or hidden stories in ${edition.date}`);
+      }
+      if (!current.newspaperEditions.length && !(current.route === '/newspaper/' && current.archiveEmpty)) report.regressions.push(`${prefix}: newspaper contains no editions.`);
+      const datedRoute = current.route.match(/^\/newspaper\/(\d{4}-\d{2}-\d{2})\//);
+      if (datedRoute && (current.newspaperEditions.length !== 1 || current.newspaperEditions[0].date !== datedRoute[1])) report.regressions.push(`${prefix}: dated URL shows the wrong edition.`);
+      if (current.route === '/newspaper/') {
+        const index = JSON.parse(await readFile('_data/newspaper_archive.json', 'utf8'));
+        const expectedDates = index.editions.map(edition => edition.date).sort().reverse();
+        const asOf = new Date(`${index.asOf}T00:00:00Z`);
+        if (index.schemaVersion !== 1 || index.retainDays !== 30 || !Number.isFinite(asOf.valueOf()) || asOf.toISOString().slice(0, 10) !== index.asOf) {
+          report.regressions.push(`${prefix}: invalid 30-day archive configuration.`);
+        } else {
+          asOf.setUTCDate(asOf.getUTCDate() - 29);
+          const firstDate = asOf.toISOString().slice(0, 10);
+          const builtDates = editions.filter(date => date >= firstDate && date <= index.asOf).sort().reverse();
+          if (JSON.stringify(expectedDates) !== JSON.stringify(builtDates)) report.regressions.push(`${prefix}: archive index omits or adds a published edition in its active window.`);
+        }
+        if (JSON.stringify(current.newspaperEditions.map(edition => edition.date)) !== JSON.stringify(expectedDates)) report.regressions.push(`${prefix}: scrolling feed does not match the active archive.`);
+        if (current.archiveAsOf !== index.asOf) report.regressions.push(`${prefix}: archive date is missing or inconsistent.`);
+      }
+    } else {
+      if (!current.newspaperNavigation) report.regressions.push(`${prefix}: Newspaper is missing from the custom navigation.`);
+      for (const link of baseline.navigation) {
+        if (!current.navigation.includes(link)) report.regressions.push(`${prefix}: removed existing navigation link ${link}`);
+      }
     }
     for (const error of current.jsErrors) if (!baseline.jsErrors.includes(error)) report.regressions.push(`${prefix}: new browser error: ${error}`);
     for (const resource of current.failedResources) if (!baseline.failedResources.includes(resource)) report.regressions.push(`${prefix}: new failed resource: ${resource}`);

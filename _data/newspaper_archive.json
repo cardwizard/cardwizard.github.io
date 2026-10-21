@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "retainDays": 30,
+  "asOf": "2026-10-21",
+  "editions": [
+    {
+      "date": "2026-10-20",
+      "readerUrl": "https://cardwizard.github.io/newspaper/2026-10-20/",
+      "postUrl": "https://cardwizard.github.io/newspaper/2026-10-20/"
+    }
+  ]
+}
