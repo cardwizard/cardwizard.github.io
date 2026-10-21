@@ -123,6 +123,10 @@ exclude:
   - vendor
   - DESIGN.md
   - scripts
+  - node_modules
+  - package.json
+  - package-lock.json
+  - WEBSITE_OPERATIONS.md
   - .idea
 keep_files:
   - CNAME

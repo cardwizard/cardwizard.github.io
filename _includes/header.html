@@ -5,6 +5,7 @@
   <nav aria-label="Primary">
     <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>About me</a>
     <a href="{{ '/research-paper-cuts/' | relative_url }}"{% if page.url contains '/research-paper-cuts/' %} aria-current="page"{% endif %}>Research Paper Cuts</a>
+    <a href="{{ '/newspaper/' | relative_url }}"{% if page.url contains '/newspaper/' %} aria-current="page"{% endif %}>Newspaper</a>
     <a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog/' %} aria-current="page"{% endif %}>Writing</a>
     <a href="{{ '/projects/' | relative_url }}"{% if page.url contains '/projects/' %} aria-current="page"{% endif %}>Projects</a>
     <a href="{{ '/publications/' | relative_url }}"{% if page.url contains '/publications/' %} aria-current="page"{% endif %}>Publications</a>

@@ -1,54 +1,96 @@
-name: Deploy
+name: Website checks and deployment
 
 on:
-  push:
-    branches:
-      - master
-      - source
   pull_request:
-    branches:
-      - master
-      - source
+    branches: [source]
+  push:
+    branches: [source]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  deploy:
+  website-checks:
+    name: Website checks
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Setup Ruby
-      uses: actions/setup-ruby@v1
-      with:
-        ruby-version: '2.7'
-    - name: Enable bundler cache
-      uses: actions/cache@v2
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
-    - name: Install deps
-      run: |
-        gem install bundler
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
-    - name: Setup deploy options
-      id: setup
-      run: |
-        git config --global user.name "GitHub Action"
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        if [[ ${GITHUB_REF} = refs/pull/*/merge ]]; then # pull request
-          echo "::set-output name=SRC_BRANCH::${GITHUB_HEAD_REF}"
-          echo "::set-output name=NO_PUSH::--no-push"
-        elif [[ ${GITHUB_REF} = refs/heads/* ]]; then # branch, e.g. master, source etc
-          echo "::set-output name=SRC_BRANCH::${GITHUB_REF#refs/heads/}"
-        fi
-        if [[ ${{ github.repository }} = *.github.io ]]; then # user/org repo
-          echo "::set-output name=DEPLOY_BRANCH::master"
-        else
-          echo "::set-output name=DEPLOY_BRANCH::gh-pages"
-        fi
-    - name: Deploy website 
-      run:  yes | bin/deploy --verbose ${{ steps.setup.outputs.NO_PUSH }}
-                    --src ${{ steps.setup.outputs.SRC_BRANCH }} 
-                    --deploy ${{ steps.setup.outputs.DEPLOY_BRANCH }} 
+      - name: Check out proposed site
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Set up Ruby and locked gems
+        uses: ruby/setup-ruby@824c0e29fdfc7d689c191c27acc969d2d04b7dd8 # v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install browser checks
+        run: |
+          npm ci
+          npx playwright-core install --with-deps chromium
+      - name: Build proposed site
+        env:
+          JEKYLL_ENV: production
+        run: bundle exec jekyll build --trace --destination "$RUNNER_TEMP/site-current"
+      - name: Check out comparison baseline
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.event.before || github.sha }}
+          path: _baseline
+          persist-credentials: false
+      - name: Set up baseline gems
+        uses: ruby/setup-ruby@824c0e29fdfc7d689c191c27acc969d2d04b7dd8 # v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+          working-directory: _baseline
+      - name: Build comparison baseline
+        working-directory: _baseline
+        env:
+          JEKYLL_ENV: production
+        run: bundle exec jekyll build --trace --destination "$RUNNER_TEMP/site-baseline"
+      - name: Check routes, internal links and assets
+        run: bundle exec ruby scripts/check_site.rb "$RUNNER_TEMP/site-current" "$RUNNER_TEMP/site-baseline" "$RUNNER_TEMP/site-report"
+      - name: Check browser behavior and responsive pages
+        run: node scripts/check-site.mjs "$RUNNER_TEMP/site-current" "$RUNNER_TEMP/site-baseline" "$RUNNER_TEMP/site-report"
+      - name: Upload regression report and review screenshots
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: website-review-${{ github.run_id }}
+          path: ${{ runner.temp }}/site-report
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Package validated Pages artifact
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/source'
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: ${{ runner.temp }}/site-current
+
+  deploy:
+    name: Deploy GitHub Pages
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/source'
+    needs: website-checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the validated artifact
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

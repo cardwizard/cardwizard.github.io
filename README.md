@@ -20,27 +20,19 @@ for writing, and `_projects/` for project notes. The Scholar identifier is
 configured in `_config.yml`. Only add publication metadata or news supported
 by a source; do not embed changing citation counts.
 
-After preview approval, push `source`, then publish the production `_site/`
-output to `gh-pages`, the branch configured for this repository's GitHub
-Pages site. Build before running these commands, and use a fresh sibling
-directory for the temporary publishing worktree:
+Open a pull request against `source`; do not push source changes directly.
+The `Website checks` job builds the proposed and baseline sites and checks
+routes, internal resources, navigation and desktop/mobile browser behavior.
+Review its screenshots and reports before merging.
 
-```sh
-git fetch origin
-git worktree add --detach ../site-pages origin/gh-pages
-rsync -a --delete --exclude=.git _site/ ../site-pages/
-touch ../site-pages/.nojekyll
-git -C ../site-pages add --all
-git -C ../site-pages commit -m "Publish Field Notebook"
-git -C ../site-pages push origin HEAD:gh-pages
-git worktree remove ../site-pages
-```
+After the owner merges a passing PR, GitHub Actions deploys the verified artifact
+to GitHub Pages. Pages must be configured to use **GitHub Actions**, and the
+`github-pages` environment must permit only `source`. See
+[WEBSITE_OPERATIONS.md](WEBSITE_OPERATIONS.md) for the review/deployment contract.
+Muse opens PRs; it must not merge or publish directly.
 
-This preserves deployment history and never force-pushes. Do not use the
-legacy `bin/deploy` script, which deletes source-checkout contents. The old
-Deploy workflow targets `master`, not the configured `gh-pages` branch;
-automatic deployment is not yet repaired because the available OAuth
-credential cannot update workflows without the `workflow` scope.
+Do not use the legacy `bin/deploy` script, which deletes source-checkout contents,
+or manually push generated output to `master`/`gh-pages`.
 
 ## Original al-folio theme documentation
 

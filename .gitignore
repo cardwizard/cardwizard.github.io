@@ -2,7 +2,10 @@ _site
 .bundle
 .sass-cache
 .jekyll-metadata
+.jekyll-cache/
 .DS_store
 .ruby-version
 .tweet-cache/
 vendor
+node_modules/
+site-report/

@@ -1,0 +1,13 @@
+{
+  "name": "field-notebook-site-checks",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Read-only browser regression checks for the Jekyll site",
+  "scripts": {
+    "check:browser": "node scripts/check-site.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "1.59.1"
+  }
+}
